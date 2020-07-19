@@ -1,0 +1,21 @@
+#!/bin/bash
+
+COMMAND_NAME=$1
+echo $COMMAND_NAME
+IMAGE_NAME=$2
+echo $IMAGE_NAME	
+
+
+if [ "$COMMAND_NAME" = "push" ]
+then
+   docker save -o /tmp/${IMAGE_NAME}.tar $IMAGE_NAME 
+   IPFS_OUTPUT=$(pow ffs addToHot -t $POWERGATE_TOKEN "/tmp/${IMAGE_NAME}.tar")
+   echo $IPFS_OUTPUT
+   IPFS_HASH=$(echo $IPFS_OUTPUT | grep -oE  "Qm[1-9A-HJ-NP-Za-km-z]{44}")
+   echo $IPFS_HASH
+   pow ffs push -w -t $POWERGATE_TOKEN $IPFS_HASH
+elif [ "$COMMAND_NAME" = "pull" ]
+then
+   pow ffs get -t $POWERGATE_TOKEN $IMAGE_NAME /tmp/${IMAGE_NAME}.tar
+   docker load -i /tmp/${IMAGE_NAME}.tar
+fi
