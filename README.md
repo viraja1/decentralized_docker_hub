@@ -77,4 +77,32 @@ from IPFS and filecoin. It is powered by Powergate.
     docker container run -it -d alpine
     ```
     
-    
+## Pull docker image using ENS domain name
+
+1) Install GO (1.13 or above)
+
+2) Install Ethereal Command line tool    
+   ```
+   GO111MODULE=on go get github.com/wealdtech/ethereal@latest
+   ```
+   
+3) Get the IPFS hash of the docker image and set it as the content hash of your ENS domain
+
+   https://app.ens.domains/
+
+4) Pull docker image from IPFS and filecoin using ENS domain name
+
+   ```
+   ./ddocker pull {ens_domain_name}
+   ```
+   
+   Replace {ens_domain_name} with the actual ENS domain name (defaults to ENS mainnet)
+   
+   For ropsten or other testnet, you can specify network at the end
+   
+   e.g. 
+   ```
+   ./ddocker pull alpine.docker.eth ropsten
+   ```
+
+   

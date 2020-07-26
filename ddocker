@@ -3,8 +3,8 @@
 COMMAND_NAME=$1
 echo $COMMAND_NAME
 IMAGE_NAME=$2
-echo $IMAGE_NAME	
-
+echo $IMAGE_NAME
+ETH_NETWORK=${3:-mainnet}
 
 if [ "$COMMAND_NAME" = "push" ]
 then
@@ -16,6 +16,11 @@ then
    pow ffs push -w -t $POWERGATE_TOKEN $IPFS_HASH
 elif [ "$COMMAND_NAME" = "pull" ]
 then
+   if [[ $IMAGE_NAME == *".eth"* ]]; then
+     IMAGE_NAME=$(ethereal ens contenthash get --domain=${IMAGE_NAME} --network=${ETH_NETWORK})
+     IMAGE_NAME=$(echo $IMAGE_NAME | grep -oE  "Qm[1-9A-HJ-NP-Za-km-z]{44}")
+     echo $IMAGE_NAME
+   fi
    pow ffs get -t $POWERGATE_TOKEN $IMAGE_NAME /tmp/${IMAGE_NAME}.tar
    docker load -i /tmp/${IMAGE_NAME}.tar
 fi
