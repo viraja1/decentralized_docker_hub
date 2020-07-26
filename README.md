@@ -22,6 +22,8 @@ from IPFS and filecoin. It is powered by Powergate.
    cd docker
    BIGSECTORS=true make localnet
    ```
+   
+   Replace the last command above with `make up` for using filecoin testnet instead of localnet
       
  3) Create a FFS instance from a new tab and note down the token from the output
  
