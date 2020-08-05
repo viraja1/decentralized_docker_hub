@@ -8,8 +8,9 @@ ETH_NETWORK=${3:-mainnet}
 
 if [ "$COMMAND_NAME" = "push" ]
 then
-   docker save -o /tmp/${IMAGE_NAME}.tar $IMAGE_NAME 
-   IPFS_OUTPUT=$(pow ffs addToHot -t $POWERGATE_TOKEN "/tmp/${IMAGE_NAME}.tar")
+   FILE_NAME=$(sed 's/[^[:alnum:]_]//g' <<< $IMAGE_NAME)
+   docker save -o /tmp/${FILE_NAME}.tar $IMAGE_NAME
+   IPFS_OUTPUT=$(pow ffs addToHot -t $POWERGATE_TOKEN "/tmp/${FILE_NAME}.tar")
    echo $IPFS_OUTPUT
    IPFS_HASH=$(echo $IPFS_OUTPUT | grep -oE  "Qm[1-9A-HJ-NP-Za-km-z]{44}")
    echo $IPFS_HASH
