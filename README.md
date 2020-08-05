@@ -1,7 +1,7 @@
 ## Decentralized Docker Hub
 
 Using Decentralized Docker Hub, you can easily push and pull docker images
-from IPFS and filecoin. It is powered by Powergate.
+from IPFS and filecoin. It is powered by Powergate. It also has support for ENS domain names.
 
 ## Demo Video
 https://youtu.be/c0AadtIJmYo
