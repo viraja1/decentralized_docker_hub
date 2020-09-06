@@ -18,6 +18,18 @@ https://youtu.be/c0AadtIJmYo
    Install Go 1.15
    
    https://golang.org/dl/
+   
+   Once Go is installed then add the following to ~/.bashrc
+   
+   ```
+   export GOPATH=$HOME/go
+   export PATH="$GOPATH/bin:$PATH"
+   ```
+   
+   Then run the following command
+   ```
+   source ~/.bashrc
+   ```
       
 2) Run Powergate, Lotus and IPFS containers
    
@@ -90,7 +102,9 @@ https://youtu.be/c0AadtIJmYo
 
 1) Install GO (1.15 or above)
 
-2) Install Ethereal Command line tool    
+2) Install Ethereal Command line tool  
+
+   Ensure that gcc is installed for your OS before installing ethereal  
    ```
    GO111MODULE=on go get github.com/wealdtech/ethereal@latest
    ```
