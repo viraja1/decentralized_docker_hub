@@ -14,11 +14,15 @@ https://youtu.be/c0AadtIJmYo
    https://docs.docker.com/engine/install/#server
    https://docs.docker.com/compose/install/
    ```
+   
+   Install Go 1.15
+   
+   https://golang.org/dl/
       
 2) Run Powergate, Lotus and IPFS containers
    
    ```
-   git clone https://github.com/textileio/powergate.git
+   git clone --depth 1 --branch v0.5.0-rc2 https://github.com/textileio/powergate.git
    cd powergate
    make build-pow
    make build-powd
@@ -84,7 +88,7 @@ https://youtu.be/c0AadtIJmYo
     
 ## Pull docker image using ENS domain name
 
-1) Install GO (1.13 or above)
+1) Install GO (1.15 or above)
 
 2) Install Ethereal Command line tool    
    ```

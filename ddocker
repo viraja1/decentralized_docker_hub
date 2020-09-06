@@ -1,27 +1,34 @@
 #!/bin/bash
 
 COMMAND_NAME=$1
-echo $COMMAND_NAME
 IMAGE_NAME=$2
-echo $IMAGE_NAME
 ETH_NETWORK=${3:-mainnet}
+GREEN=$'\e[0;32m'
+NC=$'\e[0m'
 
 if [ "$COMMAND_NAME" = "push" ]
 then
    FILE_NAME=$(sed 's/[^[:alnum:]_]//g' <<< $IMAGE_NAME)
    docker save -o /tmp/${FILE_NAME}.tar $IMAGE_NAME
-   IPFS_OUTPUT=$(pow ffs addToHot -t $POWERGATE_TOKEN "/tmp/${FILE_NAME}.tar")
+   IPFS_OUTPUT=$(pow ffs stage -t $POWERGATE_TOKEN "/tmp/${FILE_NAME}.tar")
+   echo -e "\n"
    echo $IPFS_OUTPUT
+   echo -e "\n"
    IPFS_HASH=$(echo $IPFS_OUTPUT | grep -oE  "Qm[1-9A-HJ-NP-Za-km-z]{44}")
-   echo $IPFS_HASH
-   pow ffs push -w -t $POWERGATE_TOKEN $IPFS_HASH
+   echo  -e "IPFS CID:${GREEN} ${IPFS_HASH} ${NC}"
+   echo -e "\n"
+   pow ffs config push -o -w -t $POWERGATE_TOKEN $IPFS_HASH
 elif [ "$COMMAND_NAME" = "pull" ]
 then
    if [[ $IMAGE_NAME == *".eth"* ]]; then
      IMAGE_NAME=$(ethereal ens contenthash get --domain=${IMAGE_NAME} --network=${ETH_NETWORK})
      IMAGE_NAME=$(echo $IMAGE_NAME | grep -oE  "Qm[1-9A-HJ-NP-Za-km-z]{44}")
-     echo $IMAGE_NAME
+     echo -e "\n"
+     echo  "IPFS CID: ${GREEN} ${IMAGE_NAME} ${NC}"
+     echo -e "\n"
    fi
    pow ffs get -t $POWERGATE_TOKEN $IMAGE_NAME /tmp/${IMAGE_NAME}.tar
+   echo -e "\n ${GREEN}"
    docker load -i /tmp/${IMAGE_NAME}.tar
+   echo -e "\n ${NC}"
 fi
