@@ -33,16 +33,20 @@ https://youtu.be/c0AadtIJmYo
       
 2) Run Powergate, Lotus and IPFS containers
    
+   Ensure that make is installed for your OS
+   
    ```
-   git clone --depth 1 --branch v0.5.0-rc2 https://github.com/textileio/powergate.git
+   git clone --depth 1 --branch v0.6.2 https://github.com/textileio/powergate.git
    cd powergate
-   make build-pow
-   make build-powd
+   make install-pow
+   make install-powd
    cd docker
    BIGSECTORS=true make localnet
    ```
    
    Replace the last command above with `make up` for using filecoin testnet instead of localnet
+   
+   For hosted powergate instance provided by Textile, you can skip the last step and set POW_SERVERADDRESS env variable. 
       
  3) Create a FFS instance from a new tab and note down the token from the output
  
@@ -53,7 +57,7 @@ https://youtu.be/c0AadtIJmYo
  4) Add token as the environment variable
  
     ```
-    export POWERGATE_TOKEN={token}
+    export POW_TOKEN={token}
     ```
     
     Replace {token} in the above command with the actual token
