@@ -10,14 +10,14 @@ if [ "$COMMAND_NAME" = "push" ]
 then
    FILE_NAME=$(sed 's/[^[:alnum:]_]//g' <<< $IMAGE_NAME)
    docker save -o /tmp/${FILE_NAME}.tar $IMAGE_NAME
-   IPFS_OUTPUT=$(pow ffs stage -t $POWERGATE_TOKEN "/tmp/${FILE_NAME}.tar")
+   IPFS_OUTPUT=$(pow ffs stage "/tmp/${FILE_NAME}.tar")
    echo -e "\n"
    echo $IPFS_OUTPUT
    echo -e "\n"
    IPFS_HASH=$(echo $IPFS_OUTPUT | grep -oE  "Qm[1-9A-HJ-NP-Za-km-z]{44}")
    echo  -e "IPFS CID:${GREEN} ${IPFS_HASH} ${NC}"
    echo -e "\n"
-   pow ffs config push -o -w -t $POWERGATE_TOKEN $IPFS_HASH
+   pow ffs config push -o -w $IPFS_HASH
 elif [ "$COMMAND_NAME" = "pull" ]
 then
    if [[ $IMAGE_NAME == *".eth"* ]]; then
@@ -27,7 +27,7 @@ then
      echo  "IPFS CID: ${GREEN} ${IMAGE_NAME} ${NC}"
      echo -e "\n"
    fi
-   pow ffs get -t $POWERGATE_TOKEN $IMAGE_NAME /tmp/${IMAGE_NAME}.tar
+   pow ffs get $IMAGE_NAME /tmp/${IMAGE_NAME}.tar
    echo -e "\n ${GREEN}"
    docker load -i /tmp/${IMAGE_NAME}.tar
    echo -e "\n ${NC}"

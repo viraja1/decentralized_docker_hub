@@ -36,7 +36,7 @@ https://youtu.be/c0AadtIJmYo
    Ensure that make is installed for your OS
    
    ```
-   git clone --depth 1 --branch v0.6.2 https://github.com/textileio/powergate.git
+   git clone --depth 1 --branch v0.7.0 https://github.com/textileio/powergate.git
    cd powergate
    make install-pow
    make install-powd
