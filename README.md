@@ -38,7 +38,7 @@ https://youtu.be/c0AadtIJmYo
    Ensure that make is installed for your OS
    
    ```
-   git clone --depth 1 --branch v0.7.0 https://github.com/textileio/powergate.git
+   git clone --depth 1 --branch v0.9.2 https://github.com/textileio/powergate.git
    cd powergate
    make install-pow
    make install-powd
@@ -46,7 +46,7 @@ https://youtu.be/c0AadtIJmYo
    BIGSECTORS=true make localnet
    ```
    
-   Replace the last command above with `make up` for using filecoin testnet instead of localnet
+   Replace the last command above with `make up` for using filecoin mainnet instead of localnet
    
    For hosted powergate instance provided by Textile, you can skip the last step and set POW_SERVERADDRESS env variable. 
       
@@ -134,4 +134,17 @@ https://youtu.be/c0AadtIJmYo
    ./ddocker pull alpine.docker.eth ropsten
    ```
 
-   
+
+## Filecoin mainnet docker images
+https://ipfs.io/ipfs/QmPKru6chbbjxJXWRyNEEY8jmdte2x8ic13bUnrw8Mw7kB/
+
+
+## Decentralized Docker Hub Registry
+
+Decentralized Docker Hub Registry allows you to push and pull docker images from IPFS. 
+It provides a native docker integration via a custom docker registry server (v2). 
+It is powered by Textile Hub and Textile Buckets. It also has support for Fleek Space Daemon. 
+Decentralized Docker Hub Registry has support for encryption and team sharing via Textile Hub. 
+Custom cron scripts can be written to periodically backup the buckets containing the Docker images to Filecoin.  
+
+https://github.com/viraja1/decentralized_docker_hub_registry
