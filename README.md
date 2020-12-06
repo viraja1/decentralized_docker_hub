@@ -38,7 +38,7 @@ https://youtu.be/c0AadtIJmYo
    Ensure that make is installed for your OS
    
    ```
-   git clone --depth 1 --branch v0.9.2 https://github.com/textileio/powergate.git
+   git clone --depth 1 --branch v1.2.3 https://github.com/textileio/powergate.git
    cd powergate
    make install-pow
    make install-powd
@@ -50,10 +50,16 @@ https://youtu.be/c0AadtIJmYo
    
    For hosted powergate instance provided by Textile, you can skip the last step and set POW_SERVERADDRESS env variable. 
       
- 3) Create a FFS instance from a new tab and note down the token from the output
+ 3) Create a Powergate user from a new tab and note down the token from the output
  
     ```
-    pow ffs create
+    pow admin user create
+    ```
+    
+    For hosted powergate provided by textile, set the following admin token as an env variable before
+    running the above command (hosted powergate admin APIs are protected using admin token)
+    ```
+    export POW_ADMIN_TOKEN=
     ```
     
  4) Add token as the environment variable
